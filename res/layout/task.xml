@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:text="@string/task_lable_title"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:text="@string/task_lable_desc"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/mubiao"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/name"
+        android:contentDescription="@string/task_lable_name"
+        android:src="@drawable/mb" />
+
+    <ImageView
+        android:id="@+id/jiantou"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/name"
+        android:contentDescription="@string/task_lable_name"
+        android:src="@drawable/a1" />
+
+    <TextView
+        android:id="@+id/tid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/description"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:text="@string/TextView_0" />
+
+</RelativeLayout>
