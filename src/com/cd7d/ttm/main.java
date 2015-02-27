@@ -1,15 +1,10 @@
 package com.cd7d.ttm;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.cd7d.ttm.R;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -24,9 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 public class main extends Activity {
@@ -119,8 +112,7 @@ public class main extends Activity {
 
 				String mvar = "1";
 				// http://lz.86mt.com/ajax/login.ashx?username=zjx&password=831214
-				mvar = HttpUtil
-						.getRequest("http://lz.86mt.com/ajax/tasklist.ashx?username=zjx&loginkey=6B71B9B7-B2D5-4F96-B6C1-8790903A2435");
+				mvar = HttpUtil.getRequest("http://lz.86mt.com/ajax/tasklist.ashx?username=zjx&loginkey=6B71B9B7-B2D5-4F96-B6C1-8790903A2435");
 				JSONObject mjson = new JSONObject(mvar);
 				System.out.println(mjson.getString("usertname"));
 				System.out.println(mjson.getInt("userid"));
