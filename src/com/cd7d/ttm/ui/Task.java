@@ -23,7 +23,7 @@ public class Task extends RelativeLayout  {
 	private int screenWidth;  
     private int screenHeight;  
     Animation translateAnimation;
-	// ¶¨Òå¡¢´´½¨»­±Ê
+	// å®šä¹‰ã€åˆ›å»ºç”»ç¬”
 	Paint p = new Paint();
 
 	public Task(Context context) {  
@@ -67,7 +67,7 @@ public class Task extends RelativeLayout  {
                 int top = v.getTop() + dy;  
                 int right = v.getRight() + dx;  
                 int bottom = v.getBottom() + dy;  
-                // ÉèÖÃ²»ÄÜ³ö½ç  
+                // è®¾ç½®ä¸èƒ½å‡ºç•Œ  
                 if (left < 0) {  
                     left = 0;  
                     right = left + v.getWidth();  
@@ -97,10 +97,10 @@ public class Task extends RelativeLayout  {
             case MotionEvent.ACTION_UP:  
             	 v.layout(0, v.getTop(), v.getWidth(), v.getBottom());
 //            	translateAnimation=new TranslateAnimation(0,-v.getLeft(),0,0);
-//            	translateAnimation.setDuration(1000);               //ÉèÖÃ¶¯»­³ÖĞøÊ±¼ä  
+//            	translateAnimation.setDuration(1000);               //è®¾ç½®åŠ¨ç”»æŒç»­æ—¶é—´  
 //            	//translateAnimation.setFillAfter (true);
-//                v.setAnimation(translateAnimation);             //ÉèÖÃ¶¯»­Ğ§¹û  
-//                translateAnimation.startNow();                      //Æô¶¯¶¯»­  
+//                v.setAnimation(translateAnimation);             //è®¾ç½®åŠ¨ç”»æ•ˆæœ  
+//                translateAnimation.startNow();                      //å¯åŠ¨åŠ¨ç”»  
                 break;  
             }  
             return true;  
@@ -111,20 +111,20 @@ public class Task extends RelativeLayout  {
 //public void onDraw(Canvas canvas){
 //	super.onDraw(canvas);
 //	p.setColor(Color.RED);
-//	// »æÖÆÒ»¸öĞ¡Ô²£¨×÷ÎªĞ¡Çò£©
+//	// ç»˜åˆ¶ä¸€ä¸ªå°åœ†ï¼ˆä½œä¸ºå°çƒï¼‰
 //	canvas.drawCircle(currentX, currentY, 15, p);
 //}
 //@Override
 //public boolean onTouchEvent(MotionEvent event)
 //{
-//	// µ±Ç°×é¼şµÄcurrentX¡¢currentYÁ½¸öÊôĞÔ
+//	// å½“å‰ç»„ä»¶çš„currentXã€currentYä¸¤ä¸ªå±æ€§
 //	this.currentX = event.getX();
 //	this.currentY = event.getY();
 //	
 // 
-//	// Í¨Öª¸Ä×é¼şÖØ»æ
+//	// é€šçŸ¥æ”¹ç»„ä»¶é‡ç»˜
 //	this.invalidate();
-//	// ·µ»Øtrue±íÃ÷´¦Àí·½·¨ÒÑ¾­´¦Àí¸ÃÊÂ¼ş
+//	// è¿”å›trueè¡¨æ˜å¤„ç†æ–¹æ³•å·²ç»å¤„ç†è¯¥äº‹ä»¶
 //	return true;
 //}
 

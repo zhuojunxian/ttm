@@ -37,7 +37,7 @@ public class main extends Activity {
 		setContentView(R.layout.main);
 		mdb = new Db(this);
 		
-		//ÅĞ¶ÏÎŞÊı¾İÊ±³õÊ¼»¯Êı¾İ¿â
+		//åˆ¤æ–­æ— æ•°æ®æ—¶åˆå§‹åŒ–æ•°æ®åº“
 		try {
 			cursor = mdb.getCursor(getString(R.string.select_Table_Task));
 		} catch (SQLiteException se) {
@@ -47,22 +47,22 @@ public class main extends Activity {
 		mainlout = (ListView) findViewById(R.id.mylist);
 		ReFreshData();
 
-		// ÎªListViewµÄÁĞ±íÏîµ¥»÷ÊÂ¼ş°ó¶¨ÊÂ¼ş¼àÌıÆ÷
+		// ä¸ºListViewçš„åˆ—è¡¨é¡¹å•å‡»äº‹ä»¶ç»‘å®šäº‹ä»¶ç›‘å¬å™¨
 		// mainlout.setOnTouchListener(new OnTouchListener() {
 		//
 		// @Override
 		// public boolean onTouch(View arg0, MotionEvent arg1) {
 		// // TODO Auto-generated method stub
-		// // µ±Ç°×é¼şµÄcurrentX¡¢currentYÁ½¸öÊôĞÔ
+		// // å½“å‰ç»„ä»¶çš„currentXã€currentYä¸¤ä¸ªå±æ€§
 		// currentX = arg1.getX();
-		// System.out.println(arg1.getX() + "=." + arg1.getY() + "±»µ¥»÷ÁË");
+		// System.out.println(arg1.getX() + "=." + arg1.getY() + "è¢«å•å‡»äº†");
 		//
-		// // ·µ»Øtrue±íÃ÷´¦Àí·½·¨ÒÑ¾­´¦Àí¸ÃÊÂ¼ş
+		// // è¿”å›trueè¡¨æ˜å¤„ç†æ–¹æ³•å·²ç»å¤„ç†è¯¥äº‹ä»¶
 		// return false;
 		// }
 		//
 		// });
-		// ½øÈë±à¼­Ò³Ãæ
+		// è¿›å…¥ç¼–è¾‘é¡µé¢
 		mainlout.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
@@ -82,10 +82,10 @@ public class main extends Activity {
 
 		});
 		//
-		// ÎªListViewµÄÁĞ±íÏîµ¥»÷ÊÂ¼ş°ó¶¨ÊÂ¼ş¼àÌıÆ÷
+		// ä¸ºListViewçš„åˆ—è¡¨é¡¹å•å‡»äº‹ä»¶ç»‘å®šäº‹ä»¶ç›‘å¬å™¨
 
 		mainlout.setOnItemClickListener(new OnItemClickListener() {
-			// µÚpositionÏî±»µ¥»÷Ê±¼¤·¢¸Ã·½·¨¡£
+			// ç¬¬positioné¡¹è¢«å•å‡»æ—¶æ¿€å‘è¯¥æ–¹æ³•ã€‚
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
@@ -97,17 +97,17 @@ public class main extends Activity {
 				myint.putExtras(data);
 				startActivityForResult(myint, 0);
 
-				System.out.println(this.toString() + "±»µ¥»÷ÁË");
+				System.out.println(this.toString() + "è¢«å•å‡»äº†");
 			}
 
 		});
 
 	}
 
-	// Í¬²½Êı¾İ¿âÊı¾İÏß³Ì
+	// åŒæ­¥æ•°æ®åº“æ•°æ®çº¿ç¨‹
 	Runnable runnable = new Runnable() {
 		@Override
-		public void run() {// run()ÔÚĞÂµÄÏß³ÌÖĞÔËĞĞ
+		public void run() {// run()åœ¨æ–°çš„çº¿ç¨‹ä¸­è¿è¡Œ
 			try {
 
 				String mvar = "1";
@@ -139,18 +139,18 @@ public class main extends Activity {
 				} else {
 					System.out.println(mjson.toString());
 				}
-				mHandler.obtainMessage(0).sendToTarget();// »ñÈ¡Í¼Æ¬³É¹¦£¬ÏòuiÏß³Ì·¢ËÍMSG_SUCCESS±êÊ¶ºÍbitmap¶ÔÏó
+				mHandler.obtainMessage(0).sendToTarget();// è·å–å›¾ç‰‡æˆåŠŸï¼Œå‘uiçº¿ç¨‹å‘é€MSG_SUCCESSæ ‡è¯†å’Œbitmapå¯¹è±¡
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				mHandler.obtainMessage(1).sendToTarget();// »ñÈ¡Í¼Æ¬Ê§°Ü
+				mHandler.obtainMessage(1).sendToTarget();// è·å–å›¾ç‰‡å¤±è´¥
 			}
 
 		}
 	};
 
-	// Í¬²½Êı¾İ¿âÊı¾İÏß³ÌÆô¶¯
+	// åŒæ­¥æ•°æ®åº“æ•°æ®çº¿ç¨‹å¯åŠ¨
 	public void RefreshTask(View vw) {
 
 		if (mThread == null) {
@@ -159,23 +159,23 @@ public class main extends Activity {
 		}
 	}
 
-	// Ïß³ÌÍê³Éºó´¦ÀíUI
+	// çº¿ç¨‹å®Œæˆåå¤„ç†UI
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
 		@SuppressLint("HandlerLeak")
-		public void handleMessage(Message msg) {// ´Ë·½·¨ÔÚuiÏß³ÌÔËĞĞ
+		public void handleMessage(Message msg) {// æ­¤æ–¹æ³•åœ¨uiçº¿ç¨‹è¿è¡Œ
 			switch (msg.what) {
 			case 0:
 				ReFreshData();
 				break;
 			case 1:
-				System.out.println("Ïß³ÌÊı¾İ¶ÁÈ¡Ê§°Ü");
+				System.out.println("çº¿ç¨‹æ•°æ®è¯»å–å¤±è´¥");
 				break;
 			}
 		}
 	};
 
-	// Ë¢ĞÂÊı¾İ
+	// åˆ·æ–°æ•°æ®
 	@SuppressLint("HandlerLeak")
 	public void ReFreshData() {
 
@@ -183,13 +183,13 @@ public class main extends Activity {
 
 	}
 
-	// ½øÈëµ±Ç°Ò³
+	// è¿›å…¥å½“å‰é¡µ
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		ReFreshData();
 	}
 
-	// ÊÍ·ÅÄÚ´æ
+	// é‡Šæ”¾å†…å­˜
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -254,9 +254,9 @@ public class main extends Activity {
 			TextView mid = (TextView) arg1.findViewById(R.id.tid);
 			mid.setText(listID[arg0]);
 			TextView mname = (TextView) arg1.findViewById(R.id.name);
-			mname.setText("Ãû³Æ" + listName[arg0]);
+			mname.setText("åç§°" + listName[arg0]);
 			TextView mdesc = (TextView) arg1.findViewById(R.id.description);
-			mdesc.setText("ÃèÊö" + listDesc[arg0]);
+			mdesc.setText("æè¿°" + listDesc[arg0]);
 			return arg1;
 		};
 	}

@@ -55,7 +55,7 @@ public class Newtask extends Activity {
 		Intent intent = getIntent();
 		vtid = (String) intent.getSerializableExtra("tid");
 		if (vtid != null) {
-			// ±à¼­´¦Àí
+			// ç¼–è¾‘å¤„ç†
 			OpenDb();
 			cursor = db.rawQuery("select  * from task where _id=" + vtid, null);
 			if (cursor.getCount() > 0) {
@@ -98,8 +98,8 @@ public class Newtask extends Activity {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				if (hasFocus) {
-					// ´Ë´¦ÎªµÃµ½½¹µãÊ±µÄ´¦ÀíÄÚÈİ
-					System.out.println("±»ShowDatePicker");
+					// æ­¤å¤„ä¸ºå¾—åˆ°ç„¦ç‚¹æ—¶çš„å¤„ç†å†…å®¹
+					System.out.println("è¢«ShowDatePicker");
 
 					Newtask.this.year = tdate.getYear();
 					Newtask.this.monthOfYear = tdate.getMonth();
@@ -116,7 +116,7 @@ public class Newtask extends Activity {
 					mtl.setVisibility(View.GONE);
 					mt2.setVisibility(View.VISIBLE);
 				} else {
-					// ´Ë´¦ÎªÊ§È¥½¹µãÊ±µÄ´¦ÀíÄÚÈİ
+					// æ­¤å¤„ä¸ºå¤±å»ç„¦ç‚¹æ—¶çš„å¤„ç†å†…å®¹
 				}
 			}
 		});
@@ -196,7 +196,7 @@ public class Newtask extends Activity {
 			tisRingvar = "0";
 		}
 		if (vtid != null) {
-			// ±à¼­´¦Àí	
+			// ç¼–è¾‘å¤„ç†	
 			try {
 				// System.out.println("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring) values('"+vname+"','"+vdesc+"',datetime('now','+8 hours'),"+avail+",0,datetime('"+vdatetime+"'),0,'',"+tisRingvar+");");
 				db.execSQL("update task set "
@@ -239,7 +239,7 @@ public class Newtask extends Activity {
 		finish();
 	}
 
-	// ´ò¿ªÊı¾İ¿â
+	// æ‰“å¼€æ•°æ®åº“
 	private void OpenDb() {
 		if (db == null || !db.isOpen()) {
 			db = SQLiteDatabase.openOrCreateDatabase(this.getFilesDir()
@@ -248,7 +248,7 @@ public class Newtask extends Activity {
 
 	}
 
-	// ¹Ø±ÕÊı¾İ¿â
+	// å…³é—­æ•°æ®åº“
 	private void CloseDb() {
 		if (db != null && db.isOpen()) {
 			db.close();

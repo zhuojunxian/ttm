@@ -2,7 +2,7 @@ package com.cd7d.ttm;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-//Êı¾İ¿â²Ù×÷Àà
+//æ•°æ®åº“æ“ä½œç±»
 public class Db{
 	public 	SQLiteDatabase db;
 	public Context context;
@@ -25,7 +25,7 @@ public class Db{
 		OpenDb();
 		db.execSQL(vsql);
 	}
-	// ´ò¿ªÊı¾İ¿â
+	// æ‰“å¼€æ•°æ®åº“
 	public void OpenDb() {
 		if (db == null || !db.isOpen()) {
 			db = SQLiteDatabase.openOrCreateDatabase(this.context.getFilesDir()
@@ -34,7 +34,7 @@ public class Db{
 		
 	}
 
-	// ¹Ø±ÕÊı¾İ¿â
+	// å…³é—­æ•°æ®åº“
 	public void CloseDb() {
 		if (db != null && db.isOpen()) {
 			db.close();

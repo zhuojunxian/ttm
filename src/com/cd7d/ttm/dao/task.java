@@ -23,7 +23,7 @@ public class task extends BaseAdapter  {
     Context context;
     Db mdb;
     public String vtid="0";
-    private LayoutInflater layoutInflater; //得到一个LayoutInfalter对象用来导入布局
+    private LayoutInflater layoutInflater; //寰楀埌涓�涓狶ayoutInfalter瀵硅薄鐢ㄦ潵瀵煎叆甯冨眬
     
     public task(Context context) {  
         this.context = context;  
@@ -33,7 +33,7 @@ public class task extends BaseAdapter  {
     public void GetData(String vid){
     	vtid=vid;
 		if(vtid!=null){
-		//编辑处理
+		//缂栬緫澶勭悊
 	System.out.println("Bundle:"+vtid);
 	
 
@@ -81,7 +81,7 @@ mdb.CloseDb();
 		// TODO Auto-generated method stub
 		// Log.v("BaseAdapterTest", "getView " + position + " " + convertView);
 		ViewHolder holder=new ViewHolder();
-		//组装数据
+		//缁勮鏁版嵁
 		if(convertView==null){
 			convertView=layoutInflater.inflate(R.layout.task, null);
 			holder.title=(TextView) convertView.findViewById(R.id.name);
@@ -95,7 +95,7 @@ mdb.CloseDb();
 				holder.content.setText("test"+position);
 			
 			}
-			//使用tag存储数据
+			//浣跨敤tag瀛樺偍鏁版嵁
 			convertView.setTag(holder);
 		}else{
 			holder=(ViewHolder) convertView.getTag();

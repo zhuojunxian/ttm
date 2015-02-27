@@ -15,17 +15,17 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-//HttpÊı¾İ½»»¥²Ù×÷Àà
+//Httpæ•°æ®äº¤äº’æ“ä½œç±»
 public class HttpUtil
 {
-	// ´´½¨HttpClient¶ÔÏó
+	// åˆ›å»ºHttpClientå¯¹è±¡
 	public static HttpClient httpClient = new DefaultHttpClient();
 	public static final String BASE_URL =
 		"http://192.168.1.88:8888/auction/android/";
 	/**
 	 *
-	 * @param url ·¢ËÍÇëÇóµÄURL
-	 * @return ·şÎñÆ÷ÏìÓ¦×Ö·û´®
+	 * @param url å‘é€è¯·æ±‚çš„URL
+	 * @return æœåŠ¡å™¨å“åº”å­—ç¬¦ä¸²
 	 * @throws Exception
 	 */
 	public static String getRequest(final String url)
@@ -37,15 +37,15 @@ public class HttpUtil
 			@Override
 			public String call() throws Exception
 			{
-				// ´´½¨HttpGet¶ÔÏó¡£
+				// åˆ›å»ºHttpGetå¯¹è±¡ã€‚
 				HttpGet get = new HttpGet(url);
-				// ·¢ËÍGETÇëÇó
+				// å‘é€GETè¯·æ±‚
 				HttpResponse httpResponse = httpClient.execute(get);
-				// Èç¹û·şÎñÆ÷³É¹¦µØ·µ»ØÏìÓ¦
+				// å¦‚æœæœåŠ¡å™¨æˆåŠŸåœ°è¿”å›å“åº”
 				if (httpResponse.getStatusLine()
 					.getStatusCode() == 200)
 				{
-					// »ñÈ¡·şÎñÆ÷ÏìÓ¦×Ö·û´®
+					// è·å–æœåŠ¡å™¨å“åº”å­—ç¬¦ä¸²
 					String result = EntityUtils
 						.toString(httpResponse.getEntity());
 					return result;
@@ -58,9 +58,9 @@ public class HttpUtil
 	}
 
 	/**
-	 * @param url ·¢ËÍÇëÇóµÄURL
-	 * @param params ÇëÇó²ÎÊı
-	 * @return ·şÎñÆ÷ÏìÓ¦×Ö·û´®
+	 * @param url å‘é€è¯·æ±‚çš„URL
+	 * @param params è¯·æ±‚å‚æ•°
+	 * @return æœåŠ¡å™¨å“åº”å­—ç¬¦ä¸²
 	 * @throws Exception
 	 */
 	public static String postRequest(final String url
@@ -72,27 +72,27 @@ public class HttpUtil
 			@Override
 			public String call() throws Exception
 			{
-				// ´´½¨HttpPost¶ÔÏó¡£
+				// åˆ›å»ºHttpPostå¯¹è±¡ã€‚
 				HttpPost post = new HttpPost(url);
-				// Èç¹û´«µİ²ÎÊı¸öÊı±È½Ï¶àµÄ»°¿ÉÒÔ¶Ô´«µİµÄ²ÎÊı½øĞĞ·â×°
+				// å¦‚æœä¼ é€’å‚æ•°ä¸ªæ•°æ¯”è¾ƒå¤šçš„è¯å¯ä»¥å¯¹ä¼ é€’çš„å‚æ•°è¿›è¡Œå°è£…
 				List<NameValuePair> params = 
 					new ArrayList<NameValuePair>();
 				for(String key : rawParams.keySet())
 				{
-					//·â×°ÇëÇó²ÎÊı
+					//å°è£…è¯·æ±‚å‚æ•°
 					params.add(new BasicNameValuePair(key 
 						, rawParams.get(key)));
 				}
-				// ÉèÖÃÇëÇó²ÎÊı
+				// è®¾ç½®è¯·æ±‚å‚æ•°
 				post.setEntity(new UrlEncodedFormEntity(
 					params, "gbk"));
-				// ·¢ËÍPOSTÇëÇó
+				// å‘é€POSTè¯·æ±‚
 				HttpResponse httpResponse = httpClient.execute(post);
-				// Èç¹û·şÎñÆ÷³É¹¦µØ·µ»ØÏìÓ¦
+				// å¦‚æœæœåŠ¡å™¨æˆåŠŸåœ°è¿”å›å“åº”
 				if (httpResponse.getStatusLine()
 					.getStatusCode() == 200)
 				{
-					// »ñÈ¡·şÎñÆ÷ÏìÓ¦×Ö·û´®
+					// è·å–æœåŠ¡å™¨å“åº”å­—ç¬¦ä¸²
 					String result = EntityUtils
 						.toString(httpResponse.getEntity());
 					return result;
