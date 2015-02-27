@@ -1,6 +1,7 @@
 package com.cd7d.ttm.ui;
 
 import com.cd7d.ttm.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
 import android.util.AttributeSet;
@@ -52,7 +53,7 @@ public class Task extends RelativeLayout  {
 	private OnTouchListener movingEventListener = new OnTouchListener() {  
         int lastX, lastY;  
   
-        @Override  
+        @SuppressLint("ClickableViewAccessibility") @Override  
         public boolean onTouch(View v, MotionEvent event) {  
             switch (event.getAction()) {  
             case MotionEvent.ACTION_DOWN:  
