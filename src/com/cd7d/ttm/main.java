@@ -181,8 +181,13 @@ public class main extends Activity {
 	// 刷新数据
 	@SuppressLint("HandlerLeak")
 	public void ReFreshData() {
-
-		mainlout.setAdapter(new myadt());
+		
+		com.cd7d.ttm.dao.task mtask = new com.cd7d.ttm.dao.task(this);
+		if (mtask != null) {
+			mtask.GetData("");
+			mainlout.setAdapter(mtask);
+		}
+		
 
 	}
 

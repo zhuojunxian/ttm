@@ -6,10 +6,9 @@ import com.cd7d.ttm.R;
 
 
 
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,82 @@ import android.widget.TextView;
  
 
 public class task extends BaseAdapter  {
-	stringHolder[] holders;
+	
+//	stringHolder[] holders;
 	Cursor cursor; 
-    Context context;
+   Context context;
     Db mdb;
     public String vtid="0";
-    private LayoutInflater layoutInflater; //得到一个LayoutInfalter对象用来导入布局
+   private LayoutInflater layoutInflater; //得到一个LayoutInfalter对象用来导入布局
+//    
     
+	String[] listID;
+	String[] listName;
+	String[] listDesc;
+	String[] listPercent;
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		int ccount = 0;
+		if(listID!=null){
+			ccount = listID.length;
+		}
+//		try {
+//
+//			cursor = mdb.getCursor(context.getString(R.string.select_Table_Task));
+//
+//			listID = new String[cursor.getCount()];
+//			listName = new String[cursor.getCount()];
+//			listDesc = new String[cursor.getCount()];
+//			listPercent = new String[cursor.getCount()];
+//			while (cursor.moveToNext()) {
+//				listID[ccount] = cursor.getString(0);
+//				listName[ccount] = cursor.getString(1);
+//				listDesc[ccount] = cursor.getString(2);
+//				listPercent[ccount] = cursor.getString(5);
+//				ccount = ccount + 1;
+//			}
+//		} catch (SQLiteException se) {
+//
+//		}
+
+		return ccount;
+	}
+
+	@Override
+	public Object getItem(int arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		// TODO Auto-generated method stub
+		return arg0;
+	}
+
+	@Override
+	public View getView(int arg0, View arg1, ViewGroup arg2) {
+		if (arg1 == null) {
+			arg1 = layoutInflater.inflate( R.layout.itemtask,
+					null);
+		}
+		// ImageView miv = (ImageView) arg1.findViewById(R.id.imageView1);
+		// miv.setImageResource(imgItem[arg0]);
+		TextView mid = (TextView) arg1.findViewById(R.id.tid);
+		mid.setText(listID[arg0]+"%");
+		TextView mpercent = (TextView) arg1.findViewById(R.id.tpercent);
+		mpercent.setText(listPercent[arg0]+"%");
+		
+		TextView mname = (TextView) arg1.findViewById(R.id.name);
+		mname.setText(listName[arg0]);
+		TextView mdesc = (TextView) arg1.findViewById(R.id.description);
+		mdesc.setText(listDesc[arg0]);
+		return arg1;
+	};
+	
+
     public task(Context context) {  
         this.context = context;  
         this.layoutInflater = LayoutInflater.from(context);  
@@ -38,72 +106,32 @@ public class task extends BaseAdapter  {
 	
 
 	mdb=new Db(this.context);
-	
+	if(vtid.length()>0&&vtid!="0"){
 	cursor=mdb.getCursor("select  * from task where _id="+vtid+" ");
- 
-	holders=new stringHolder[cursor.getCount()];
-	int holderi=0;
-while(cursor.moveToNext()){
-	holders[holderi]=new stringHolder();
-	holders[holderi].title=cursor.getString(1);
-	holders[holderi].content=cursor.getString(2);
- 
-	holderi++;
-}
+	}else{
+		cursor = mdb.getCursor(context.getString(R.string.select_Table_Task));
+	}
+	int ccount = 0;
+
+	listID = new String[cursor.getCount()];
+	listName = new String[cursor.getCount()];
+	listDesc = new String[cursor.getCount()];
+	listPercent = new String[cursor.getCount()];
+	while (cursor.moveToNext()) {
+		listID[ccount] = cursor.getString(0);
+		listName[ccount] = cursor.getString(1);
+		listDesc[ccount] = cursor.getString(2);
+		listPercent[ccount] = cursor.getString(5);
+		ccount = ccount + 1;
+	}
 mdb.CloseDb();
 	
 	
 	}
     }
-    
-    
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return holders.length;
-	}
 
-	@Override
-	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+     
 
-	@Override
-	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return position;
-	}
-
-	@SuppressLint("InflateParams")
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		// Log.v("BaseAdapterTest", "getView " + position + " " + convertView);
-		ViewHolder holder=new ViewHolder();
-		//组装数据
-		if(convertView==null){
-			convertView=layoutInflater.inflate(R.layout.itemtask, null);
-			holder.title=(TextView) convertView.findViewById(R.id.name);
-			holder.content=(TextView) convertView.findViewById(R.id.description);
-			if(holders.length>0){
-				holder.title.setText(holders[position].title);
-				holder.content.setText(holders[position].content);
-
-			}else{
-				holder.title.setText("test");
-				holder.content.setText("test"+position);
-			
-			}
-			//使用tag存储数据
-			convertView.setTag(holder);
-		}else{
-			holder=(ViewHolder) convertView.getTag();
-		}
-
-
-		return convertView;  
-	}
 
 	public static class ViewHolder {
 		TextView title;
