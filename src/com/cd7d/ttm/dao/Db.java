@@ -1,4 +1,5 @@
-package com.cd7d.ttm;
+package com.cd7d.ttm.dao;
+import com.cd7d.ttm.R;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

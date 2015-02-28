@@ -1,4 +1,4 @@
-package com.cd7d.ttm;
+package com.cd7d.ttm.dao;
 
 import java.util.ArrayList;
 import java.util.List;

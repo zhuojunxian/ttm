@@ -5,6 +5,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.cd7d.ttm.R;
+import com.cd7d.ttm.dao.Db;
+import com.cd7d.ttm.dao.HttpUtil;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -246,17 +249,17 @@ public class main extends Activity {
 		@Override
 		public View getView(int arg0, View arg1, ViewGroup arg2) {
 			if (arg1 == null) {
-				arg1 = View.inflate(getApplicationContext(), R.layout.task,
+				arg1 = View.inflate(getApplicationContext(), R.layout.itemtask,
 						null);
 			}
 			// ImageView miv = (ImageView) arg1.findViewById(R.id.imageView1);
 			// miv.setImageResource(imgItem[arg0]);
 			TextView mid = (TextView) arg1.findViewById(R.id.tid);
-			mid.setText(listID[arg0]);
+			mid.setText(listID[arg0]+"%");
 			TextView mname = (TextView) arg1.findViewById(R.id.name);
-			mname.setText("名称" + listName[arg0]);
+			mname.setText(listName[arg0]);
 			TextView mdesc = (TextView) arg1.findViewById(R.id.description);
-			mdesc.setText("描述" + listDesc[arg0]);
+			mdesc.setText(listDesc[arg0]);
 			return arg1;
 		};
 	}

@@ -2,8 +2,8 @@ package com.cd7d.ttm.dao;
 
  
 
-import com.cd7d.ttm.Db;
 import com.cd7d.ttm.R;
+
 
 
 
@@ -83,7 +83,7 @@ mdb.CloseDb();
 		ViewHolder holder=new ViewHolder();
 		//组装数据
 		if(convertView==null){
-			convertView=layoutInflater.inflate(R.layout.task, null);
+			convertView=layoutInflater.inflate(R.layout.itemtask, null);
 			holder.title=(TextView) convertView.findViewById(R.id.name);
 			holder.content=(TextView) convertView.findViewById(R.id.description);
 			if(holders.length>0){

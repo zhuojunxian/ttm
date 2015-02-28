@@ -14,42 +14,45 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int a1=0x7f020000;
-        public static final int a2=0x7f020001;
-        public static final int go=0x7f020002;
+        public static final int corner=0x7f020000;
+        public static final int cornerbg=0x7f020001;
+        public static final int cornerwithnumber=0x7f020002;
         public static final int ic_launcher=0x7f020003;
-        public static final int mb=0x7f020004;
+        public static final int tic01=0x7f020004;
+        public static final int ticno=0x7f020005;
+        public static final int ticnowithnumber=0x7f020006;
+        public static final int ticyes=0x7f020007;
     }
     public static final class id {
-        public static final int button1=0x7f070000;
-        public static final int button2=0x7f07000a;
-        public static final int checkBox1=0x7f070006;
-        public static final int contentEr=0x7f070002;
-        public static final int datePicker1=0x7f07000b;
-        public static final int description=0x7f07000e;
-        public static final int jiantou=0x7f070010;
-        public static final int listView1=0x7f070012;
-        public static final int mubiao=0x7f07000f;
-        public static final int myDatePicker=0x7f070009;
-        public static final int mylist=0x7f070001;
-        public static final int name=0x7f07000d;
-        public static final int newtaskdesc=0x7f070004;
-        public static final int newtaskname=0x7f070003;
-        public static final int showdate=0x7f070007;
-        public static final int spinner1=0x7f070005;
-        public static final int tdatetime=0x7f070008;
-        public static final int textView1=0x7f070014;
-        public static final int textView2=0x7f070013;
-        public static final int textView3=0x7f070015;
-        public static final int tid=0x7f070011;
-        public static final int timePicker1=0x7f07000c;
+        public static final int button1=0x7f070005;
+        public static final int button2=0x7f070012;
+        public static final int checkBox1=0x7f07000e;
+        public static final int contentEr=0x7f07000a;
+        public static final int datePicker1=0x7f070013;
+        public static final int description=0x7f070001;
+        public static final int jiantou=0x7f070003;
+        public static final int listView1=0x7f070015;
+        public static final int mubiao=0x7f070002;
+        public static final int myDatePicker=0x7f070011;
+        public static final int mylist=0x7f070009;
+        public static final int name=0x7f070000;
+        public static final int newtaskdesc=0x7f07000c;
+        public static final int newtaskname=0x7f07000b;
+        public static final int showdate=0x7f07000f;
+        public static final int spinner1=0x7f07000d;
+        public static final int tdatetime=0x7f070010;
+        public static final int textView1=0x7f070007;
+        public static final int textView2=0x7f070006;
+        public static final int textView3=0x7f070008;
+        public static final int tid=0x7f070004;
+        public static final int timePicker1=0x7f070014;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
-        public static final int newtask=0x7f030001;
-        public static final int task=0x7f030002;
-        public static final int viewtask=0x7f030003;
-        public static final int work=0x7f030004;
+        public static final int itemtask=0x7f030000;
+        public static final int itemwork=0x7f030001;
+        public static final int main=0x7f030002;
+        public static final int newtask=0x7f030003;
+        public static final int viewtask=0x7f030004;
     }
     public static final class string {
         public static final int TextView_0=0x7f05000d;

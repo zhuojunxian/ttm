@@ -2,17 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#787878"
     android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/mylist"
+        android:layout_width="wrap_content"
+ android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#787878"
+        android:dividerHeight="10dp"
+        android:padding="5dp"
+        android:paddingBottom="40dp" >
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:height="80dp"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="RefreshTask"
+            
             android:text="@string/main_button_tbsj" />
 
         <Button
@@ -21,11 +37,5 @@
             android:onClick="AddNewTask"
             android:text="@string/main_button_tjrw" />
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/mylist"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
 
 </LinearLayout>

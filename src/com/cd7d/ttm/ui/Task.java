@@ -30,7 +30,7 @@ public class Task extends RelativeLayout  {
 	public Task(Context context) {  
         super(context);  
 		 LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
-	        inflater.inflate(R.layout.task, this);  
+	        inflater.inflate(R.layout.itemtask, this);  
 	        imageView=(ImageView) findViewById(R.id.jiantou); 
 	        DisplayMetrics dm = getResources().getDisplayMetrics();  
 	        screenWidth = dm.widthPixels;  
@@ -40,7 +40,7 @@ public class Task extends RelativeLayout  {
 	public Task(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		 LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
-	        inflater.inflate(R.layout.task, this);  
+	        inflater.inflate(R.layout.itemtask, this);  
 	        imageView=(ImageView) findViewById(R.id.jiantou); 
 	        DisplayMetrics dm = getResources().getDisplayMetrics();  
 	        screenWidth = dm.widthPixels;  
