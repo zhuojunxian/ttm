@@ -209,6 +209,7 @@ public class main extends Activity {
 		String[] listID;
 		String[] listName;
 		String[] listDesc;
+		String[] listPercent;
 
 		@Override
 		public int getCount() {
@@ -221,10 +222,12 @@ public class main extends Activity {
 				listID = new String[cursor.getCount()];
 				listName = new String[cursor.getCount()];
 				listDesc = new String[cursor.getCount()];
+				listPercent = new String[cursor.getCount()];
 				while (cursor.moveToNext()) {
 					listID[ccount] = cursor.getString(0);
 					listName[ccount] = cursor.getString(1);
 					listDesc[ccount] = cursor.getString(2);
+					listPercent[ccount] = cursor.getString(5);
 					ccount = ccount + 1;
 				}
 			} catch (SQLiteException se) {
@@ -256,6 +259,9 @@ public class main extends Activity {
 			// miv.setImageResource(imgItem[arg0]);
 			TextView mid = (TextView) arg1.findViewById(R.id.tid);
 			mid.setText(listID[arg0]+"%");
+			TextView mpercent = (TextView) arg1.findViewById(R.id.tpercent);
+			mpercent.setText(listPercent[arg0]+"%");
+			
 			TextView mname = (TextView) arg1.findViewById(R.id.name);
 			mname.setText(listName[arg0]);
 			TextView mdesc = (TextView) arg1.findViewById(R.id.description);

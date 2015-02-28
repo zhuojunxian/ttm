@@ -40,7 +40,7 @@
         android:src="@drawable/tic01" />
 
     <TextView
-        android:id="@+id/tid"
+        android:id="@+id/tpercent"
         android:layout_width="60dp"
         android:layout_height="55dp"
 
@@ -54,8 +54,8 @@
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tid"
-        android:layout_alignBottom="@+id/tid"
+        android:layout_alignBaseline="@+id/tpercent"
+        android:layout_alignBottom="@+id/tpercent"
         android:layout_toLeftOf="@+id/mubiao"
         android:layout_toRightOf="@+id/jiantou"
         android:ellipsize="end"
@@ -64,5 +64,11 @@
         android:text="@string/task_lable_desc"
         android:textColor="#818181"
         android:textSize="14sp" />
-
+  <TextView
+        android:id="@+id/tid"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+ android:visibility="gone" 
+        android:text="@string/TextView_0" />
+    
 </RelativeLayout>
