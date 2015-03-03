@@ -31,7 +31,6 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class main extends Activity {
 	public float currentX = 40;
@@ -66,10 +65,10 @@ public class main extends Activity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 
-				cursor.moveToPosition(position);
+				TextView mname = (TextView) view.findViewById(R.id.tid);
 				myint = new Intent(main.this, Newtask.class);
 				Bundle data = new Bundle();
-				data.putSerializable("tid", cursor.getString(0));
+				data.putSerializable("tid", mname.getText().toString());
 				myint.putExtras(data);
 				startActivityForResult(myint, 0);
 

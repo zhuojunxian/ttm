@@ -49,7 +49,19 @@ public class Db{
 	
    public void init(){
     	if(!exits("task")){
-    		RunSql("create table task(_id integer primary key autoincrement,name varchar(50),description varchar(250),edittime datetime,begintime datetime,ttype integer,percent integer,ttime datetime,torder integer,tpic varchar(250),isring integer,overtime datetime,sync integer);  ");
+    		RunSql("create table task"
+    				+ "(_id integer primary key autoincrement,"//自动编号
+    				+ "name varchar(50),description varchar(250),"//任务名称
+    				+ "edittime datetime,"//
+    				+ "begintime datetime,"//
+    				+ "ttype integer,"//
+    				+ "percent integer,"//
+    				+ "ttime datetime,"
+    				+ "torder integer,"
+    				+ "tpic varchar(250),"
+    				+ "isring integer,"
+    				+ "overtime datetime,"
+    				+ "sync integer);  ");
     	}
 if(!exits("twork")){
     		RunSql("  create table twork(_id integer primary key autoincrement,tid integer,wtime datetime,wnote varchar(250),wpoint integer,wtype integer); ");
