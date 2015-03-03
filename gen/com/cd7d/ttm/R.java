@@ -9,6 +9,7 @@ package com.cd7d.ttm;
 
 public final class R {
     public static final class array {
+        public static final int tpercent=0x7f040001;
         public static final int ttype=0x7f040000;
     }
     public static final class attr {
@@ -28,32 +29,41 @@ public final class R {
         public static final int ticyes=0x7f02000b;
     }
     public static final class id {
-        public static final int button1=0x7f070006;
-        public static final int button2=0x7f070015;
-        public static final int button3=0x7f070018;
-        public static final int checkBox1=0x7f070011;
-        public static final int contentEr=0x7f07000d;
-        public static final int datePicker1=0x7f070016;
+        public static final int checkBox1=0x7f070018;
+        public static final int contentEr=0x7f070014;
+        public static final int datePicker1=0x7f07001d;
         public static final int description=0x7f070001;
+        public static final int imageView1=0x7f070012;
+        public static final int imageView2=0x7f070011;
+        public static final int imageView4=0x7f07000d;
         public static final int jiantou=0x7f070003;
-        public static final int listView1=0x7f070019;
-        public static final int lv_popup_list=0x7f07000c;
+        public static final int layfooter=0x7f070010;
+        public static final int laytop=0x7f07000c;
+        public static final int listView1=0x7f070020;
+        public static final int listVieww=0x7f070022;
+        public static final int lv_popup_list=0x7f070013;
+        public static final int menuall=0x7f07001f;
+        public static final int menucausle=0x7f07001c;
+        public static final int menupub=0x7f070007;
         public static final int mubiao=0x7f070002;
-        public static final int myDatePicker=0x7f070014;
-        public static final int mylist=0x7f07000b;
+        public static final int myDatePicker=0x7f07001b;
+        public static final int mylist=0x7f07000f;
         public static final int name=0x7f070000;
-        public static final int newtaskdesc=0x7f07000f;
-        public static final int newtaskname=0x7f07000e;
-        public static final int showdate=0x7f070012;
-        public static final int spinner1=0x7f070010;
-        public static final int tdatetime=0x7f070013;
-        public static final int textView1=0x7f070008;
-        public static final int textView2=0x7f070007;
-        public static final int textView3=0x7f070009;
+        public static final int newtaskdesc=0x7f070016;
+        public static final int newtaskname=0x7f070015;
+        public static final int popmenubt=0x7f07000e;
+        public static final int showdate=0x7f070019;
+        public static final int tdatetime=0x7f07001a;
         public static final int tid=0x7f070005;
-        public static final int timePicker1=0x7f070017;
+        public static final int timePicker1=0x7f07001e;
         public static final int tpercent=0x7f070004;
-        public static final int tv_list_item=0x7f07000a;
+        public static final int tv_list_item=0x7f07000b;
+        public static final int viewtaskAddworkNote=0x7f070021;
+        public static final int viewtaskAddworkPercent=0x7f070017;
+        public static final int wid=0x7f07000a;
+        public static final int workDate=0x7f070008;
+        public static final int workdesc=0x7f070009;
+        public static final int workno=0x7f070006;
     }
     public static final class layout {
         public static final int itemtask=0x7f030000;
@@ -67,14 +77,12 @@ public final class R {
     public static final class string {
         public static final int TextView_0=0x7f05000d;
         public static final int app_name=0x7f050000;
-        public static final int create_Table_Task=0x7f05000e;
-        public static final int dbname=0x7f050010;
+        public static final int dbname=0x7f05000e;
         public static final int finish=0x7f05000a;
         public static final int goback=0x7f050009;
         public static final int main_button_tbsj=0x7f05000b;
         public static final int main_button_tjrw=0x7f05000c;
         public static final int save=0x7f050008;
-        public static final int select_Table_Task=0x7f05000f;
         public static final int task_lable_date=0x7f050005;
         public static final int task_lable_desc=0x7f050003;
         public static final int task_lable_isweek=0x7f050007;

@@ -1,8 +1,12 @@
-package com.cd7d.ttm;
+package com.cd7d.ttm.ui;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.cd7d.ttm.R;
+
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -49,7 +53,7 @@ public class Newtask extends Activity {
 		mydatetime = (EditText) findViewById(R.id.tdatetime);
 		tname = (EditText) findViewById(R.id.newtaskname);
 		tDesc = (EditText) findViewById(R.id.newtaskdesc);
-		ttype = (Spinner) findViewById(R.id.spinner1);
+		ttype = (Spinner) findViewById(R.id.viewtaskAddworkPercent);
 		tisRing = (CheckBox) findViewById(R.id.checkBox1);
 
 		Intent intent = getIntent();
@@ -158,7 +162,7 @@ public class Newtask extends Activity {
 				.toString() + "/ttm.db3", null);
 		tname = (EditText) findViewById(R.id.newtaskname);
 		tDesc = (EditText) findViewById(R.id.newtaskdesc);
-		ttype = (Spinner) findViewById(R.id.spinner1);
+		ttype = (Spinner) findViewById(R.id.viewtaskAddworkPercent);
 		tisRing = (CheckBox) findViewById(R.id.checkBox1);
 
 		// TODO Auto-generated method stub

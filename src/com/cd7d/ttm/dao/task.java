@@ -6,9 +6,9 @@ import com.cd7d.ttm.R;
 
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +72,7 @@ public class task extends BaseAdapter  {
 		return arg0;
 	}
 
-	@Override
+	@SuppressLint("InflateParams") @Override
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
 		if (arg1 == null) {
 			arg1 = layoutInflater.inflate( R.layout.itemtask,
@@ -81,7 +81,7 @@ public class task extends BaseAdapter  {
 		// ImageView miv = (ImageView) arg1.findViewById(R.id.imageView1);
 		// miv.setImageResource(imgItem[arg0]);
 		TextView mid = (TextView) arg1.findViewById(R.id.tid);
-		mid.setText(listID[arg0]+"%");
+		mid.setText(listID[arg0]);
 		TextView mpercent = (TextView) arg1.findViewById(R.id.tpercent);
 		mpercent.setText(listPercent[arg0]+"%");
 		
@@ -98,19 +98,25 @@ public class task extends BaseAdapter  {
         this.layoutInflater = LayoutInflater.from(context);  
     } 
     
-    public void GetData(String vid){
+    public void GetData(String vid,String vtype){
     	vtid=vid;
 		if(vtid!=null){
 		//编辑处理
 	System.out.println("Bundle:"+vtid);
 	
-
+String vsql="";
 	mdb=new Db(this.context);
 	if(vtid.length()>0&&vtid!="0"){
-	cursor=mdb.getCursor("select  * from task where _id="+vtid+" ");
+		vsql="select  * from task where _id="+vtid+" ";
 	}else{
-		cursor = mdb.getCursor(context.getString(R.string.select_Table_Task));
+		if(vtype.length()>0){
+			vsql="select * from task where ttype="+vtype+" order by torder desc, _id desc";
+	 	}else{
+	 		vsql="select * from task order by torder desc, _id desc";
+		}
 	}
+	System.out.println(vsql);
+	cursor=mdb.getCursor(vsql);
 	int ccount = 0;
 
 	listID = new String[cursor.getCount()];
@@ -121,7 +127,7 @@ public class task extends BaseAdapter  {
 		listID[ccount] = cursor.getString(0);
 		listName[ccount] = cursor.getString(1);
 		listDesc[ccount] = cursor.getString(2);
-		listPercent[ccount] = cursor.getString(5);
+		listPercent[ccount] = cursor.getString(6);
 		ccount = ccount + 1;
 	}
 mdb.CloseDb();

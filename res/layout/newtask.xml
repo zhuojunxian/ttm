@@ -70,7 +70,7 @@
                 android:text="@string/task_lable_ttype" />
 
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/viewtaskAddworkPercent"
  android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
@@ -135,7 +135,7 @@
         android:visibility="gone" >
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/menucausle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="Picked"
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content" />
         
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/menuall"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="Picked"

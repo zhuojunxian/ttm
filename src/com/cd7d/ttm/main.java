@@ -1,5 +1,9 @@
 package com.cd7d.ttm;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -7,23 +11,27 @@ import org.json.JSONObject;
 import com.cd7d.ttm.R;
 import com.cd7d.ttm.dao.Db;
 import com.cd7d.ttm.dao.HttpUtil;
+import com.cd7d.ttm.ui.Newtask;
+import com.cd7d.ttm.ui.Viewtask;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.PopupWindow;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class main extends Activity {
 	public float currentX = 40;
@@ -33,39 +41,24 @@ public class main extends Activity {
 	ListView mainlout;
 	Cursor cursor;
 	Db mdb;
+	public int IsPopMenuShow = 0;
+	List<Map<String, String>> moreList;
+	private PopupWindow pwMyPopWindow;// popupwindow
+	private ListView lvPopupList;// popupwindow中的ListView
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
+		iniPopupWindow();
+
 		mdb = new Db(this);
-		
-		//判断无数据时初始化数据库
-		try {
-			cursor = mdb.getCursor(getString(R.string.select_Table_Task));
-		} catch (SQLiteException se) {
-			mdb.RunSql(this.getString(R.string.create_Table_Task));
-		}
-		
+		mdb.init();
+
 		mainlout = (ListView) findViewById(R.id.mylist);
 		ReFreshData();
 
-		// 为ListView的列表项单击事件绑定事件监听器
-		// mainlout.setOnTouchListener(new OnTouchListener() {
-		//
-		// @Override
-		// public boolean onTouch(View arg0, MotionEvent arg1) {
-		// // TODO Auto-generated method stub
-		// // 当前组件的currentX、currentY两个属性
-		// currentX = arg1.getX();
-		// System.out.println(arg1.getX() + "=." + arg1.getY() + "被单击了");
-		//
-		// // 返回true表明处理方法已经处理该事件
-		// return false;
-		// }
-		//
-		// });
-		// 进入编辑页面
 		mainlout.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
@@ -92,19 +85,80 @@ public class main extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
-				cursor.moveToPosition(position);
+				TextView mname = (TextView) view.findViewById(R.id.tid);
+				// cursor.moveToPosition(position);
 				myint = new Intent(main.this, Viewtask.class);
 				Bundle data = new Bundle();
-				data.putSerializable("tid", cursor.getString(0));
+				data.putSerializable("tid", mname.getText().toString());
 				myint.putExtras(data);
 				startActivityForResult(myint, 0);
 
-				System.out.println(this.toString() + "被单击了");
+				System.out.println(position + "被单击了" + mname.getText());
 			}
 
 		});
 
+	}
+
+	private void iniPopupWindow() {
+		moreList = new ArrayList<Map<String, String>>();
+		Map<String, String> map;
+		map = new HashMap<String, String>();
+		map.put("share_key", "全部任务");
+		moreList.add(map);
+		map = new HashMap<String, String>();
+		map.put("share_key", "私人任务");
+		moreList.add(map);
+		map = new HashMap<String, String>();
+		map.put("share_key", "项目任务");
+		moreList.add(map);
+		LayoutInflater inflater = (LayoutInflater) this
+				.getSystemService(LAYOUT_INFLATER_SERVICE);
+		View layout = inflater.inflate(R.layout.menu, null);
+		lvPopupList = (ListView) layout.findViewById(R.id.lv_popup_list);
+		pwMyPopWindow = new PopupWindow(layout, 200, 200);
+		;
+		pwMyPopWindow.setFocusable(true);// 加上这个popupwindow中的ListView才可以接收点击事件
+
+		lvPopupList.setAdapter(new SimpleAdapter(main.this, moreList,
+				R.layout.list_item_popupwindow, new String[] { "share_key" },
+				new int[] { R.id.tv_list_item }));
+		lvPopupList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if (moreList.get(position).get("share_key") == "全部任务") {
+//					Toast.makeText(main.this,
+//							moreList.get(position).get("share_key"),
+//							Toast.LENGTH_LONG).show();
+					ReFreshData("","");
+				}else{
+					ReFreshData("",""+position);
+				}
+				
+				pwMyPopWindow.dismiss(); // ①
+
+			}
+
+			
+		});
+
+		// 控制popupwindow的宽度和高度自适应
+		lvPopupList.measure(View.MeasureSpec.UNSPECIFIED,
+				View.MeasureSpec.UNSPECIFIED);
+		// 控制popupwindow点击屏幕其他地方消失
+		pwMyPopWindow.setBackgroundDrawable(this.getResources().getDrawable(
+				R.drawable.cornerbg));// 设置背景图片，不能在布局中设置，要通过代码来设置
+		pwMyPopWindow.setOutsideTouchable(true);// 触摸popupwindow外部，popupwindow消失。这个要求你的popupwindow要有背景图片才可以成功，如上
+	}
+
+	public void showPopMenu(View vi) {
+		pwMyPopWindow.showAsDropDown(vi);
+		// 将PopupWindow显示在指定位置
+		pwMyPopWindow.showAtLocation(findViewById(R.id.popmenubt),
+				Gravity.CENTER, 20, 20);
+		IsPopMenuShow = 1;
 	}
 
 	// 同步数据库数据线程
@@ -115,7 +169,8 @@ public class main extends Activity {
 
 				String mvar = "1";
 				// http://lz.86mt.com/ajax/login.ashx?username=zjx&password=831214
-				mvar = HttpUtil.getRequest("http://lz.86mt.com/ajax/tasklist.ashx?username=zjx&loginkey=6B71B9B7-B2D5-4F96-B6C1-8790903A2435");
+				mvar = HttpUtil
+						.getRequest("http://lz.86mt.com/ajax/tasklist.ashx?username=zjx&loginkey=81FA9BD0-53F7-4B04-BB69-3505C465DB70");
 				JSONObject mjson = new JSONObject(mvar);
 				System.out.println(mjson.getString("usertname"));
 				System.out.println(mjson.getInt("userid"));
@@ -130,12 +185,18 @@ public class main extends Activity {
 								+ "','"
 								+ jsonArray.optJSONObject(i).getString("note")
 								+ "',datetime('"
-								+ (jsonArray.optJSONObject(i).getString("time").length()>0?jsonArray.optJSONObject(i).getString("time"):"now','+8 hours")
+								+ (jsonArray.optJSONObject(i).getString("time")
+										.length() > 0 ? jsonArray
+										.optJSONObject(i).getString("time")
+										: "now','+8 hours")
 								+ "'),1,"
-								+ jsonArray.optJSONObject(i).getString("percent")
+								+ jsonArray.optJSONObject(i).getString(
+										"percent")
 								+ ",datetime('"
-								+ (jsonArray.optJSONObject(i).getString("time").length()>0?jsonArray.optJSONObject(i).getString("time"):"now','+8 hours")
-								+ "'),0,'',1);");
+								+ (jsonArray.optJSONObject(i).getString("time")
+										.length() > 0 ? jsonArray
+										.optJSONObject(i).getString("time")
+										: "now','+8 hours") + "'),0,'',1);");
 
 					}
 
@@ -181,16 +242,19 @@ public class main extends Activity {
 	// 刷新数据
 	@SuppressLint("HandlerLeak")
 	public void ReFreshData() {
-		
-		com.cd7d.ttm.dao.task mtask = new com.cd7d.ttm.dao.task(this);
-		if (mtask != null) {
-			mtask.GetData("");
-			mainlout.setAdapter(mtask);
-		}
+		ReFreshData("","");
 		
 
 	}
-
+	public void ReFreshData(String vid,String vtype) {
+		// TODO Auto-generated method stub
+		com.cd7d.ttm.dao.task mtask = new com.cd7d.ttm.dao.task(this);
+		if (mtask != null) {
+			mtask.GetData(vid,vtype);
+			mainlout.setAdapter(mtask);
+		}
+		
+	}
 	// 进入当前页
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -210,68 +274,4 @@ public class main extends Activity {
 		startActivityForResult(myint, 0);
 	}
 
-	class myadt extends BaseAdapter {
-		String[] listID;
-		String[] listName;
-		String[] listDesc;
-		String[] listPercent;
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			int ccount = 0;
-			try {
-	
-				cursor = mdb.getCursor(getString(R.string.select_Table_Task));
-
-				listID = new String[cursor.getCount()];
-				listName = new String[cursor.getCount()];
-				listDesc = new String[cursor.getCount()];
-				listPercent = new String[cursor.getCount()];
-				while (cursor.moveToNext()) {
-					listID[ccount] = cursor.getString(0);
-					listName[ccount] = cursor.getString(1);
-					listDesc[ccount] = cursor.getString(2);
-					listPercent[ccount] = cursor.getString(5);
-					ccount = ccount + 1;
-				}
-			} catch (SQLiteException se) {
-
-			}
-
-			return ccount;
-		}
-
-		@Override
-		public Object getItem(int arg0) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public long getItemId(int arg0) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public View getView(int arg0, View arg1, ViewGroup arg2) {
-			if (arg1 == null) {
-				arg1 = View.inflate(getApplicationContext(), R.layout.itemtask,
-						null);
-			}
-			// ImageView miv = (ImageView) arg1.findViewById(R.id.imageView1);
-			// miv.setImageResource(imgItem[arg0]);
-			TextView mid = (TextView) arg1.findViewById(R.id.tid);
-			mid.setText(listID[arg0]+"%");
-			TextView mpercent = (TextView) arg1.findViewById(R.id.tpercent);
-			mpercent.setText(listPercent[arg0]+"%");
-			
-			TextView mname = (TextView) arg1.findViewById(R.id.name);
-			mname.setText(listName[arg0]);
-			TextView mdesc = (TextView) arg1.findViewById(R.id.description);
-			mdesc.setText(listDesc[arg0]);
-			return arg1;
-		};
-	}
 }

@@ -46,5 +46,23 @@ public class Db{
 		RunSql(vsql);
 		
 	}
+	
+   public void init(){
+    	if(!exits("task")){
+    		RunSql("create table task(_id integer primary key autoincrement,name varchar(50),description varchar(250),edittime datetime,begintime datetime,ttype integer,percent integer,ttime datetime,torder integer,tpic varchar(250),isring integer,overtime datetime,sync integer);  ");
+    	}
+if(!exits("twork")){
+    		RunSql("  create table twork(_id integer primary key autoincrement,tid integer,wtime datetime,wnote varchar(250),wpoint integer,wtype integer); ");
+    	}
+    }
+    public boolean exits(String table){
+    	boolean exits = false;
+    	String sql = "select * from sqlite_master where name="+"'"+table+"'";
+    	Cursor cursor = getCursor(sql);
 
+    	if(cursor.getCount()!=0){
+    	exits = true;
+    	}
+    	return exits;
+    	}
 }

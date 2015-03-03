@@ -14,8 +14,6 @@
     <string name="main_button_tbsj">同步数据</string>
     <string name="main_button_tjrw">添加任务</string>
     <string name="TextView_0">100%</string>
-    <string name="create_Table_Task">create table task(_id integer primary key autoincrement,name varchar(50),description varchar(250),edittime datetime,begintime datetime,ttype integer,percent integer,ttime datetime,torder integer,tpic varchar(250),isring integer,overtime datetime,sync integer);    create table work(_id integer primary key autoincrement,tid integer,wtime datetime,wnote varchar(250),wpoint integer,wtype integer);   </string>
-    <string name="select_Table_Task">select * from task order by torder desc, _id desc</string>
     <string name="dbname">ttm.db3</string>
 
 </resources>
