@@ -52,16 +52,17 @@ public class Db{
     		RunSql("create table task"
     				+ "(_id integer primary key autoincrement,"//自动编号
     				+ "name varchar(50),description varchar(250),"//任务名称
-    				+ "edittime datetime,"//
-    				+ "begintime datetime,"//
-    				+ "ttype integer,"//
-    				+ "percent integer,"//
-    				+ "ttime datetime,"
-    				+ "torder integer,"
-    				+ "tpic varchar(250),"
-    				+ "isring integer,"
-    				+ "overtime datetime,"
-    				+ "sync integer);  ");
+    				+ "edittime datetime,"//编辑时间
+    				+ "begintime datetime,"//开始时间
+    				+ "ttype integer,"//类型 1单次，2每日，3每周，4每月，5进度
+    				+ "percent integer,"//完成百分比
+    				+ "ttime datetime,"//相关时间
+    				+ "torder integer,"//排度值，暂时没用
+    				+ "tpic varchar(250),"//相关图片
+    				+ "isring integer,"//是否提醒
+    				+ "overtime datetime,"//完成时间
+    				+ "projectid integer,"//项目ID
+    				+ "sync integer);  ");//服务器ID
     	}
 if(!exits("twork")){
     		RunSql("  create table twork(_id integer primary key autoincrement,tid integer,wtime datetime,wnote varchar(250),wpoint integer,wtype integer); ");

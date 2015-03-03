@@ -106,7 +106,7 @@ public class main extends Activity {
 		map.put("share_key", "全部任务");
 		moreList.add(map);
 		map = new HashMap<String, String>();
-		map.put("share_key", "私人任务");
+		map.put("share_key", "个人任务");
 		moreList.add(map);
 		map = new HashMap<String, String>();
 		map.put("share_key", "项目任务");
@@ -127,13 +127,17 @@ public class main extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if (moreList.get(position).get("share_key") == "全部任务") {
+				
+
+				if (moreList.get(position).get("share_key") == "个人任务") {
 //					Toast.makeText(main.this,
 //							moreList.get(position).get("share_key"),
 //							Toast.LENGTH_LONG).show();
-					ReFreshData("","");
+					ReFreshData("","1");
+				}else if(moreList.get(position).get("share_key") == "项目任务"){
+					ReFreshData("","2");
 				}else{
-					ReFreshData("",""+position);
+					ReFreshData("","");
 				}
 				
 				pwMyPopWindow.dismiss(); // ①
@@ -169,7 +173,7 @@ public class main extends Activity {
 				String mvar = "1";
 				// http://lz.86mt.com/ajax/login.ashx?username=zjx&password=831214
 				mvar = HttpUtil
-						.getRequest("http://lz.86mt.com/ajax/tasklist.ashx?username=zjx&loginkey=81FA9BD0-53F7-4B04-BB69-3505C465DB70");
+						.getRequest("http://lz.86mt.com/ajax/tasklist.ashx?username=zjx&loginkey=E30038A1-F87A-4C5B-8ED1-6BAF013BA62A");
 				JSONObject mjson = new JSONObject(mvar);
 				System.out.println(mjson.getString("usertname"));
 				System.out.println(mjson.getInt("userid"));
@@ -179,7 +183,7 @@ public class main extends Activity {
 
 					for (int i = 0; i < jsonArray.length(); i++) {
 
-						mdb.execSQL("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring)  values('"
+						mdb.execSQL("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring,projectid,sync)  values('"
 								+ jsonArray.optJSONObject(i).getString("name")
 								+ "','"
 								+ jsonArray.optJSONObject(i).getString("note")
@@ -188,14 +192,21 @@ public class main extends Activity {
 										.length() > 0 ? jsonArray
 										.optJSONObject(i).getString("time")
 										: "now','+8 hours")
-								+ "'),1,"
+								+ "'),"
+								+ jsonArray.optJSONObject(i).getString("type")+","
 								+ jsonArray.optJSONObject(i).getString(
 										"percent")
 								+ ",datetime('"
 								+ (jsonArray.optJSONObject(i).getString("time")
 										.length() > 0 ? jsonArray
 										.optJSONObject(i).getString("time")
-										: "now','+8 hours") + "'),0,'',1);");
+										: "now','+8 hours") + "'),0,'',"
+												+((jsonArray.optJSONObject(i).getString("isring")=="43")?"1":"0")
+														+ ","
+												+jsonArray.optJSONObject(i).getString("projectid")
+														+ ","
+												+jsonArray.optJSONObject(i).getString("no")
+														+ ");");
 
 					}
 
@@ -250,6 +261,7 @@ public class main extends Activity {
 		com.cd7d.ttm.dao.task mtask = new com.cd7d.ttm.dao.task(this);
 		if (mtask != null) {
 			mtask.GetData(vid,vtype);
+		
 			mainlout.setAdapter(mtask);
 		}
 		
