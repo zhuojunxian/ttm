@@ -81,7 +81,7 @@ public class Db {
 					+ "isring integer,"// 是否提醒
 					+ "overtime datetime,"// 完成时间
 					+ "projectid integer,"// 项目ID
-					+ "sync integer);  ");// 服务器ID
+					+ "serverid integer);  ");// 服务器ID
 		}
 		if (!exits("twork")) {
 			RunSql("  create table twork(_id integer primary key autoincrement,tid integer,wtime datetime,wnote varchar(250),wpoint integer,wtype integer); ");

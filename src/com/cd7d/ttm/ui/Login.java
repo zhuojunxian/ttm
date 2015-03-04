@@ -9,6 +9,7 @@ import com.cd7d.ttm.dao.HttpUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -155,7 +156,25 @@ public class Login extends Activity {
 				        try{
 					for (int i = 0; i < jsonArray.length(); i++) {
 
-						mdb.db.execSQL("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring,projectid,sync)  values('"
+						
+						 Cursor ckcursor = mdb.db.rawQuery("select  * from task where serverid="+jsonArray.optJSONObject(i).getString("no"), null);
+
+						if (ckcursor.getCount() != 0) {
+							mdb.db.execSQL("update task set "
+									+ "name='"+ jsonArray.optJSONObject(i).getString("name")+ "',"
+									+ "description='"+ jsonArray.optJSONObject(i).getString("note")+ "',"
+									+ "edittime='"+ jsonArray.optJSONObject(i).getString("time")+ "',"
+									+ "ttype="+ jsonArray.optJSONObject(i).getString("type")+ ","
+									+ "percent="+ jsonArray.optJSONObject(i).getString("percent")+ ","
+									+ "ttime='"+ jsonArray.optJSONObject(i).getString("time")+ "',"
+									//+ "torder='"+ jsonArray.optJSONObject(i).getString("name")+ "',"
+									//+ "tpic='"+ jsonArray.optJSONObject(i).getString("name")+ "',"
+									+ "isring="+ ((jsonArray.optJSONObject(i).getString("isring") == "43") ? "1" : "0")+ ","
+									+ "projectid="+ jsonArray.optJSONObject(i).getString("projectid")+ ""
+									+ " where serverid="+jsonArray.optJSONObject(i).getString("no")+";");
+						}else{
+						
+						mdb.db.execSQL("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring,projectid,serverid)  values('"
 								+ jsonArray.optJSONObject(i).getString("name")
 								+ "','"
 								+ jsonArray.optJSONObject(i).getString("note")
@@ -175,14 +194,14 @@ public class Login extends Activity {
 										.optJSONObject(i).getString("time")
 										: "now','+8 hours")
 								+ "'),0,'',"
-								+ ((jsonArray.optJSONObject(i).getString(
-										"isring") == "43") ? "1" : "0")
+								+ ((jsonArray.optJSONObject(i).getString("isring") == "43") ? "1" : "0")
 								+ ","
 								+ jsonArray.optJSONObject(i).getString(
 										"projectid")
 								+ ","
 								+ jsonArray.optJSONObject(i).getString("no")
 								+ ");");
+						}
 
 					}
 					mdb.db.setTransactionSuccessful();  
