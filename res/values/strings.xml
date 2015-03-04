@@ -8,12 +8,18 @@
     <string name="task_lable_date">日期</string>
     <string name="task_lable_time">时间</string>
     <string name="task_lable_isweek">提醒</string>
+    <string name="login_usernamelab">用户名</string>
+    <string name="login_userpasslab">密码</string>
+    <string name="login_loginbt">登录</string>
+    <string name="login_logoutbt">退出登录</string>
+    <string name="login_update">同步数据</string>
     <string name="save">保存</string>
     <string name="goback">返回</string>
     <string name="finish">完成</string>
     <string name="main_button_tbsj">同步数据</string>
     <string name="main_button_tjrw">添加任务</string>
     <string name="TextView_0">100%</string>
+    <string name="ServerUrl">http://lz.86mt.com</string>
     <string name="dbname">ttm.db3</string>
 
 </resources>

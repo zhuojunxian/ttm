@@ -5,22 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import com.cd7d.ttm.R;
 import com.cd7d.ttm.dao.Db;
-import com.cd7d.ttm.dao.HttpUtil;
 import com.cd7d.ttm.ui.Newtask;
 import com.cd7d.ttm.ui.Viewtask;
-
+import com.cd7d.ttm.ui.Login;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +31,6 @@ public class main extends Activity {
 	public float currentX = 40;
 	public float currentY = 50;
 	public Intent myint;
-	private Thread mThread;
 	ListView mainlout;
 	Cursor cursor;
 	Db mdb;
@@ -127,24 +121,22 @@ public class main extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
 
 				if (moreList.get(position).get("share_key") == "个人任务") {
-//					Toast.makeText(main.this,
-//							moreList.get(position).get("share_key"),
-//							Toast.LENGTH_LONG).show();
-					ReFreshData("","1");
-				}else if(moreList.get(position).get("share_key") == "项目任务"){
-					ReFreshData("","2");
-				}else{
-					ReFreshData("","");
+					// Toast.makeText(main.this,
+					// moreList.get(position).get("share_key"),
+					// Toast.LENGTH_LONG).show();
+					ReFreshData("", "1");
+				} else if (moreList.get(position).get("share_key") == "项目任务") {
+					ReFreshData("", "2");
+				} else {
+					ReFreshData("", "");
 				}
-				
+
 				pwMyPopWindow.dismiss(); // ①
 
 			}
 
-			
 		});
 
 		// 控制popupwindow的宽度和高度自适应
@@ -164,108 +156,31 @@ public class main extends Activity {
 		IsPopMenuShow = 1;
 	}
 
-	// 同步数据库数据线程
-	Runnable runnable = new Runnable() {
-		@Override
-		public void run() {// run()在新的线程中运行
-			try {
-
-				String mvar = "1";
-				// http://lz.86mt.com/ajax/login.ashx?username=zjx&password=831214
-				mvar = HttpUtil
-						.getRequest("http://lz.86mt.com/ajax/tasklist.ashx?username=zjx&loginkey=E30038A1-F87A-4C5B-8ED1-6BAF013BA62A");
-				JSONObject mjson = new JSONObject(mvar);
-				System.out.println(mjson.getString("usertname"));
-				System.out.println(mjson.getInt("userid"));
-				if (mjson.getInt("userid") > 0) {
-
-					JSONArray jsonArray = mjson.getJSONArray("taskdata");
-
-					for (int i = 0; i < jsonArray.length(); i++) {
-
-						mdb.execSQL("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring,projectid,sync)  values('"
-								+ jsonArray.optJSONObject(i).getString("name")
-								+ "','"
-								+ jsonArray.optJSONObject(i).getString("note")
-								+ "',datetime('"
-								+ (jsonArray.optJSONObject(i).getString("time")
-										.length() > 0 ? jsonArray
-										.optJSONObject(i).getString("time")
-										: "now','+8 hours")
-								+ "'),"
-								+ jsonArray.optJSONObject(i).getString("type")+","
-								+ jsonArray.optJSONObject(i).getString(
-										"percent")
-								+ ",datetime('"
-								+ (jsonArray.optJSONObject(i).getString("time")
-										.length() > 0 ? jsonArray
-										.optJSONObject(i).getString("time")
-										: "now','+8 hours") + "'),0,'',"
-												+((jsonArray.optJSONObject(i).getString("isring")=="43")?"1":"0")
-														+ ","
-												+jsonArray.optJSONObject(i).getString("projectid")
-														+ ","
-												+jsonArray.optJSONObject(i).getString("no")
-														+ ");");
-
-					}
-
-				} else {
-					System.out.println(mjson.toString());
-				}
-				mHandler.obtainMessage(0).sendToTarget();// 获取图片成功，向ui线程发送MSG_SUCCESS标识和bitmap对象
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				mHandler.obtainMessage(1).sendToTarget();// 获取图片失败
-			}
-
-		}
-	};
-
 	// 同步数据库数据线程启动
 	public void RefreshTask(View vw) {
 
-		if (mThread == null) {
-			mThread = new Thread(runnable);
-			mThread.start();
-		}
 	}
 
-	// 线程完成后处理UI
-	@SuppressLint("HandlerLeak")
-	private Handler mHandler = new Handler() {
-		@SuppressLint("HandlerLeak")
-		public void handleMessage(Message msg) {// 此方法在ui线程运行
-			switch (msg.what) {
-			case 0:
-				ReFreshData();
-				break;
-			case 1:
-				System.out.println("线程数据读取失败");
-				break;
-			}
-		}
-	};
+
 
 	// 刷新数据
 	@SuppressLint("HandlerLeak")
 	public void ReFreshData() {
-		ReFreshData("","");
-		
+		ReFreshData("", "");
 
 	}
-	public void ReFreshData(String vid,String vtype) {
+
+	public void ReFreshData(String vid, String vtype) {
 		// TODO Auto-generated method stub
 		com.cd7d.ttm.dao.task mtask = new com.cd7d.ttm.dao.task(this);
 		if (mtask != null) {
-			mtask.GetData(vid,vtype);
-		
+			mtask.GetData(vid, vtype);
+
 			mainlout.setAdapter(mtask);
 		}
-		
+
 	}
+
 	// 进入当前页
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -285,4 +200,9 @@ public class main extends Activity {
 		startActivityForResult(myint, 0);
 	}
 
+	public void Login(View vw) {
+		myint = new Intent(main.this, Login.class);
+
+		startActivityForResult(myint, 0);
+	}
 }

@@ -5,7 +5,6 @@ import com.cd7d.ttm.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
-import android.opengl.Visibility;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

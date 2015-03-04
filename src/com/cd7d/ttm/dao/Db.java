@@ -1,6 +1,7 @@
 package com.cd7d.ttm.dao;
 
 import com.cd7d.ttm.R;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,8 @@ public class Db {
 	public SQLiteDatabase db;
 	public Context context;
 	private Cursor cursor;
+	public String UserName="";
+	public String UserKey="";
 
 	public Db(Context main) {
 		context = main;
@@ -61,6 +64,8 @@ public class Db {
 					+ "userkey varchar(50),"// 临时码
 					+ "mobile varchar(50),"// 手机号
 					+ "truename varchar(50));  ");// 真实姓名
+			
+			RunSql("insert into userinfo(username) values('');");// 真实姓名
 		}
 		if (!exits("task")) {
 			RunSql("create table task"
@@ -93,5 +98,29 @@ public class Db {
 			exits = true;
 		}
 		return exits;
+	}
+
+	public  boolean Islogin() {
+		// TODO Auto-generated method stub
+		boolean exits = false;
+		String sql = "select  * from userinfo where length(username)>0 and length(userkey)>30 limit  1;";
+		Cursor cursor = getCursor(sql);
+
+		if (cursor.getCount() != 0) {
+			cursor.moveToFirst();
+			UserName=cursor.getString(1);
+			UserKey=cursor.getString(3);
+			exits = true;
+		}
+		return exits;
+	}
+
+	public String NoInjSql(String var) {
+		// TODO Auto-generated method stub
+		String revar="";
+		if(var!=null&&var.length()>0){
+		revar=var.replace("'", "");
+		}
+		return revar;
 	}
 }

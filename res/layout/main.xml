@@ -75,7 +75,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="30dp"
             android:contentDescription="@string/main_button_tjrw"
-            android:onClick="AddNewTask"
+            android:onClick="Login"
             android:src="@drawable/login" />
 
         <ImageView
