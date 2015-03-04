@@ -72,7 +72,7 @@ public class Login extends Activity {
 	}
 
 	public void ToLogin(View vw) {
-		System.out.println(R.string.ServerUrl+"/ajax/login.ashx?username=");
+ 
 		EditText lgusername = (EditText) findViewById(R.id.loginUsername);
 		EditText lguserpass = (EditText) findViewById(R.id.loginUserpass);
 		String mvar = "1";

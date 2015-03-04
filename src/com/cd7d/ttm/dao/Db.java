@@ -84,7 +84,14 @@ public class Db {
 					+ "serverid integer);  ");// 服务器ID
 		}
 		if (!exits("twork")) {
-			RunSql("  create table twork(_id integer primary key autoincrement,tid integer,wtime datetime,wnote varchar(250),wpoint integer,wtype integer); ");
+			RunSql("  create table twork("
+					+ "_id integer primary key autoincrement,"
+					+ "tid integer,"
+					+ "wtime datetime,"
+					+ "wnote varchar(250),"
+					+ "wpoint integer,"
+					+ "wtype integer,"
+					+ "serverid integer); ");
 		}
 	}
 

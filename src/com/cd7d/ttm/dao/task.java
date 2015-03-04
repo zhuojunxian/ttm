@@ -19,6 +19,7 @@ public class task extends BaseAdapter {
 	Context context;
 	Db mdb;
 	public String vtid = "0";
+	public String vServerid="0";
 	private LayoutInflater layoutInflater; // 得到一个LayoutInfalter对象用来导入布局
 
 	taskmod[] mlist; 
@@ -114,6 +115,10 @@ if(mlist[arg0].listType.trim().equals("5")){	//进度显示百分比
 				mlist[ccount].listType = cursor.getString(5);
 				mlist[ccount].listProjectID = cursor.getString(12);
 				mlist[ccount].listPercent = cursor.getString(6);
+				mlist[ccount].listServerid = cursor.getString(13);
+				if (vtid.length() > 0 && vtid != "0") {
+					vServerid=cursor.getString(13);
+				}
 				ccount = ccount + 1;
 			}
 			mdb.CloseDb();

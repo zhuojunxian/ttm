@@ -7,4 +7,5 @@ public class taskmod {
 	public String listProjectID="0";
 	public String listDesc="0";
 	public String listPercent="0";
+	public String listServerid="0";
 }
