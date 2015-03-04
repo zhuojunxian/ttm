@@ -104,7 +104,11 @@ public class Login extends Activity {
 		mdb.RunSql("update userinfo set username='',userpass='',userkey='' ");
 		Refresh();
 	}
+	public void ToClose(View vw) {
+		finish();
+	}
 
+	
 	public void ToUpdate(View vw) {
 		if (mThread == null) {
 			mThread = new Thread(runnable);
@@ -146,10 +150,12 @@ public class Login extends Activity {
 				if (mjson.getInt("userid") > 0) {
 
 					JSONArray jsonArray = mjson.getJSONArray("taskdata");
-
+					mdb.OpenDb();
+					mdb.db.beginTransaction();  //手动设置开始事务
+				        try{
 					for (int i = 0; i < jsonArray.length(); i++) {
 
-						mdb.execSQL("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring,projectid,sync)  values('"
+						mdb.db.execSQL("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring,projectid,sync)  values('"
 								+ jsonArray.optJSONObject(i).getString("name")
 								+ "','"
 								+ jsonArray.optJSONObject(i).getString("note")
@@ -179,7 +185,13 @@ public class Login extends Activity {
 								+ ");");
 
 					}
-
+					mdb.db.setTransactionSuccessful();  
+				        }catch(Exception e){
+				        	e.printStackTrace();
+				           }finally{
+				        	   mdb.db.endTransaction(); //处理完成
+				           }
+				        mdb.CloseDb();
 				} else {
 					System.out.println(mjson.toString());
 				}
