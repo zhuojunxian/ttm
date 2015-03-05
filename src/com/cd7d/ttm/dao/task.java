@@ -53,25 +53,25 @@ public class task extends BaseAdapter {
 		}
 		
 		TextView mid = (TextView) arg1.findViewById(R.id.tid);
-		mid.setText(mlist[arg0].listID);
+		mid.setText(mlist[arg0].ID);
 		
 		TextView mpercent = (TextView) arg1.findViewById(R.id.tpercent);
 	
-if(mlist[arg0].listType.trim().equals("5")){	//进度显示百分比
-	mpercent.setText(mlist[arg0].listPercent + "%");
+if(mlist[arg0].Type.trim().equals("5")){	//进度显示百分比
+	mpercent.setText(mlist[arg0].Percent + "%");
 }else{
 	mpercent.setVisibility(View.GONE);
 	ImageView mmubiao = (ImageView) arg1.findViewById(R.id.mubiao);
 	mmubiao.setImageResource(R.drawable.ticno);
-	System.out.println(mlist[arg0].listType);
+	System.out.println(mlist[arg0].Type);
 }
  
 
 
 		TextView mname = (TextView) arg1.findViewById(R.id.name);
-		mname.setText(mlist[arg0].listName);
+		mname.setText(mlist[arg0].Name);
 		TextView mdesc = (TextView) arg1.findViewById(R.id.description);
-		mdesc.setText(mlist[arg0].listDesc);
+		mdesc.setText(mlist[arg0].Desc);
 		return arg1;
 	};
 
@@ -109,13 +109,13 @@ if(mlist[arg0].listType.trim().equals("5")){	//进度显示百分比
 
 			while (cursor.moveToNext()) {
 				mlist[ccount]=new taskmod();
-				mlist[ccount].listID = cursor.getString(0);
-				mlist[ccount].listName = cursor.getString(1);				
-				mlist[ccount].listDesc = cursor.getString(2);
-				mlist[ccount].listType = cursor.getString(5);
-				mlist[ccount].listProjectID = cursor.getString(12);
-				mlist[ccount].listPercent = cursor.getString(6);
-				mlist[ccount].listServerid = cursor.getString(13);
+				mlist[ccount].ID = cursor.getString(0);
+				mlist[ccount].Name = cursor.getString(1);				
+				mlist[ccount].Desc = cursor.getString(2);
+				mlist[ccount].Type = cursor.getString(5);
+				mlist[ccount].ProjectID = cursor.getString(12);
+				mlist[ccount].Percent = cursor.getString(6);
+				mlist[ccount].Serverid = cursor.getString(13);
 				if (vtid.length() > 0 && vtid != "0") {
 					vServerid=cursor.getString(13);
 				}

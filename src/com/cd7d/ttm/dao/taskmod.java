@@ -1,11 +1,12 @@
 package com.cd7d.ttm.dao;
 
 public class taskmod {
-	public String listID="0";
-	public String listName="";
-	public String listType="0";
-	public String listProjectID="0";
-	public String listDesc="0";
-	public String listPercent="0";
-	public String listServerid="0";
+	public String ID="0";
+	public String Name="";
+	public String Type="0";
+	public String Edittime="1901-01-01";
+	public String ProjectID="0";
+	public String Desc="0";
+	public String Percent="0";
+	public String Serverid="0";
 }

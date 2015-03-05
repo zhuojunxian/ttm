@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/laytop"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:height="80dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/popmenubt"
+            android:layout_width="24dp"
+            android:layout_height="47dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/main_button_tbsj"
+            android:onClick="ToClose"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/login_update"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/getserverdata_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/laytop"
+        android:layout_marginTop="185dp"
+        android:onClick="ToClose"
+        android:text="@string/goback" />
+
+    <TextView
+        android:id="@+id/getServerDatalb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/laytop"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79dp"
+        android:text="@string/login_update" />
+
+</RelativeLayout>

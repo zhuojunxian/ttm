@@ -64,6 +64,8 @@ public class HttpUtil
 	 * @throws Exception
 	 */
 	public static String postRequest(final String url
+
+			
 		, final Map<String ,String> rawParams)throws Exception
 	{
 		FutureTask<String> task = new FutureTask<String>(
@@ -85,7 +87,7 @@ public class HttpUtil
 				}
 				// 设置请求参数
 				post.setEntity(new UrlEncodedFormEntity(
-					params, "gbk"));
+					params, "utf-8"));
 				// 发送POST请求
 				HttpResponse httpResponse = httpClient.execute(post);
 				// 如果服务器成功地返回响应

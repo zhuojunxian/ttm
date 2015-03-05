@@ -11,8 +11,8 @@ public class Db {
 	public SQLiteDatabase db;
 	public Context context;
 	private Cursor cursor;
-	public String UserName="";
-	public String UserKey="";
+	public String UserName = "";
+	public String UserKey = "";
 
 	public Db(Context main) {
 		context = main;
@@ -55,7 +55,9 @@ public class Db {
 
 	}
 
+	// 初始化数据库
 	public void init() {
+		//用户信息
 		if (!exits("userinfo")) {
 			RunSql("create table userinfo"
 					+ "(_id integer primary key autoincrement,"// 自动编号
@@ -64,13 +66,15 @@ public class Db {
 					+ "userkey varchar(50),"// 临时码
 					+ "mobile varchar(50),"// 手机号
 					+ "truename varchar(50));  ");// 真实姓名
-			
+
 			RunSql("insert into userinfo(username) values('');");// 真实姓名
 		}
+		//任务表
 		if (!exits("task")) {
 			RunSql("create table task"
 					+ "(_id integer primary key autoincrement,"// 自动编号
-					+ "name varchar(50),description varchar(250),"// 任务名称
+					+ "name varchar(50),"
+					+ "description varchar(250),"// 任务名称
 					+ "edittime datetime,"// 编辑时间
 					+ "begintime datetime,"// 开始时间
 					+ "ttype integer,"// 类型 1单次，2每日，3每周，4每月，5进度
@@ -83,14 +87,12 @@ public class Db {
 					+ "projectid integer,"// 项目ID
 					+ "serverid integer);  ");// 服务器ID
 		}
+		//工作记录表
 		if (!exits("twork")) {
 			RunSql("  create table twork("
-					+ "_id integer primary key autoincrement,"
-					+ "tid integer,"
-					+ "wtime datetime,"
-					+ "wnote varchar(250),"
-					+ "wpoint integer,"
-					+ "wtype integer,"
+					+ "_id integer primary key autoincrement," + "tid integer,"
+					+ "wtime datetime," + "wnote varchar(250),"
+					+ "wpoint integer," + "wtype integer,"
 					+ "serverid integer); ");
 		}
 	}
@@ -107,7 +109,7 @@ public class Db {
 		return exits;
 	}
 
-	public  boolean Islogin() {
+	public boolean Islogin() {
 		// TODO Auto-generated method stub
 		boolean exits = false;
 		String sql = "select  * from userinfo where length(username)>0 and length(userkey)>30 limit  1;";
@@ -115,8 +117,8 @@ public class Db {
 
 		if (cursor.getCount() != 0) {
 			cursor.moveToFirst();
-			UserName=cursor.getString(1);
-			UserKey=cursor.getString(3);
+			UserName = cursor.getString(1);
+			UserKey = cursor.getString(3);
 			exits = true;
 		}
 		return exits;
@@ -124,9 +126,9 @@ public class Db {
 
 	public String NoInjSql(String var) {
 		// TODO Auto-generated method stub
-		String revar="";
-		if(var!=null&&var.length()>0){
-		revar=var.replace("'", "");
+		String revar = "";
+		if (var != null && var.length() > 0) {
+			revar = var.replace("'", "");
 		}
 		return revar;
 	}
