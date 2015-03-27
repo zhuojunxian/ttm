@@ -7,6 +7,8 @@ import java.util.Date;
 import com.cd7d.ttm.R;
 
 
+import com.cd7d.ttm.dao.Db;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -157,7 +159,7 @@ public class Newtask extends Activity {
 	}
 
 	public void Save(View vw) {
-
+		Db mdb = new Db(this);
 		db = SQLiteDatabase.openOrCreateDatabase(Newtask.this.getFilesDir()
 				.toString() + "/ttm.db3", null);
 		tname = (EditText) findViewById(R.id.newtaskname);
@@ -220,7 +222,7 @@ public class Newtask extends Activity {
 		} else {
 			try {
 				// System.out.println("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring) values('"+vname+"','"+vdesc+"',datetime('now','+8 hours'),"+avail+",0,datetime('"+vdatetime+"'),0,'',"+tisRingvar+");");
-				db.execSQL("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring) values('"
+				db.execSQL("insert into task(name,description,edittime,ttype,percent,ttime,torder,tpic,isring,guid) values('"
 						+ vname
 						+ "','"
 						+ vdesc
@@ -230,7 +232,7 @@ public class Newtask extends Activity {
 						+ vdatetime
 						+ "',0,'',"
 						+ tisRingvar
-						+ ");");
+						+ ",'"+mdb.Guid()+"');");
 				finish();
 			} catch (Exception e) {
 				System.out.println(e.toString());

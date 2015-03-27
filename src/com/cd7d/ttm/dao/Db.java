@@ -1,5 +1,7 @@
 package com.cd7d.ttm.dao;
 
+import java.util.UUID;
+
 import com.cd7d.ttm.R;
 
 import android.content.Context;
@@ -85,7 +87,7 @@ public class Db {
 					+ "isring integer,"// 是否提醒
 					+ "overtime datetime,"// 完成时间
 					+ "projectid integer,"// 项目ID
-					+ "serverid integer);  ");// 服务器ID
+					+ "guid varchar(36));  ");// 服务器ID
 		}
 		//工作记录表
 		if (!exits("twork")) {
@@ -93,7 +95,7 @@ public class Db {
 					+ "_id integer primary key autoincrement," + "tid integer,"
 					+ "wtime datetime," + "wnote varchar(250),"
 					+ "wpoint integer," + "wtype integer,"
-					+ "serverid integer); ");
+					+ "guid varchar(36)); ");
 		}
 	}
 
@@ -131,5 +133,9 @@ public class Db {
 			revar = var.replace("'", "");
 		}
 		return revar;
+	}
+	public String Guid(){
+		UUID uuid = UUID.randomUUID();
+	    return uuid.toString().toUpperCase();
 	}
 }

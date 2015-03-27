@@ -42,12 +42,14 @@ public class HttpUtil
 				// 发送GET请求
 				HttpResponse httpResponse = httpClient.execute(get);
 				// 如果服务器成功地返回响应
+				
 				if (httpResponse.getStatusLine()
 					.getStatusCode() == 200)
 				{
 					// 获取服务器响应字符串
 					String result = EntityUtils
 						.toString(httpResponse.getEntity());
+					//System.out.println("r:"+result);
 					return result;
 				}
 				return null;

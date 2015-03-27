@@ -115,7 +115,7 @@ if(mlist[arg0].Type.trim().equals("5")){	//进度显示百分比
 				mlist[ccount].Type = cursor.getString(5);
 				mlist[ccount].ProjectID = cursor.getString(12);
 				mlist[ccount].Percent = cursor.getString(6);
-				mlist[ccount].Serverid = cursor.getString(13);
+				mlist[ccount].Guid = cursor.getString(13);
 				if (vtid.length() > 0 && vtid != "0") {
 					vServerid=cursor.getString(13);
 				}

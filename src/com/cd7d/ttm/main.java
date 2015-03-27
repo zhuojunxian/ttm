@@ -48,7 +48,7 @@ public class main extends Activity {
 
 		mdb = new Db(this);
 		mdb.init();
-
+ 
 		mainlout = (ListView) findViewById(R.id.mylist);
 		ReFreshData();
 
